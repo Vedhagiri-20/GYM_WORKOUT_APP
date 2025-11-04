@@ -2,7 +2,7 @@ name: Product Backlog Item
 description: Create or update a PBI in the product's backlog using mandatory fields
 title: "PBI# : "
 labels: ["Backlog Item"]
-projects: ['Vedhagiri-20/GYM_WORKOUT_APP']
+projects: ['Vedhagiri-20/projects/7']
 body:
   - type: markdown
     attributes:
