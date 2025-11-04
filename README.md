@@ -1,1 +1,1 @@
-# Gym Workout Management Application
+# GYM_WORKOUT_APP
