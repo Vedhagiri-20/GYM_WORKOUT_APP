@@ -1,8 +1,9 @@
+// src/App.jsx
 import './App.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Welcome from './pages/Welcome';
-import Home from './pages/Workouts';       // this imports the default export from Workouts.jsx
-import SampleForm from './pages/Assessment';
+import ClientAssessment from './pages/ClientAssessment';
+import WorkoutLog from './pages/WorkoutLog';
 
 function App() {
   return (
@@ -11,17 +12,17 @@ function App() {
         <header className="header">
           <h1>🏋️ Healthy Habits Gym</h1>
           <nav>
-            <Link to="/">Welcome</Link> |{" "}
-            <Link to="/home">Home</Link> |{" "}
-            <Link to="/form">Sample Form</Link>
+            <Link to="/">Home</Link> |{" "}
+            <Link to="/assessment">Assessment</Link> |{" "}
+            <Link to="/workouts">Workouts</Link>
           </nav>
         </header>
 
         <main className="content">
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/form" element={<SampleForm />} />
+            <Route path="/assessment" element={<ClientAssessment />} />
+            <Route path="/workouts" element={<WorkoutLog />} />
           </Routes>
         </main>
 

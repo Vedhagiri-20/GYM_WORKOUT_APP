@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Welcome() {
   return (
@@ -6,7 +6,7 @@ export default function Welcome() {
       <h2>Welcome to Healthy Habits Gym</h2>
       <p>Start your fitness journey today!</p>
 
-      <Link to="/home">
+      <Link to="/assessment">
         <button
           style={{
             padding: "10px 20px",
@@ -18,7 +18,7 @@ export default function Welcome() {
             cursor: "pointer"
           }}
         >
-          Enter Site
+          Get Started
         </button>
       </Link>
     </div>
