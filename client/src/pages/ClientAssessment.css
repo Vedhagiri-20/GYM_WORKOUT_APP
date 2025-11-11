@@ -1,0 +1,173 @@
+/* src/pages/ClientAssessment.css */
+
+.assessment-page {
+  padding: 7rem 1rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.assessment-page h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #a8ff60;
+  text-shadow: 0 0 10px rgba(168, 255, 96, 0.3);
+}
+
+/* Profile summary cards */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: #111;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.card h3 {
+  border-bottom: 1px solid #333;
+  padding-bottom: .5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #a8ff60;
+}
+
+.card p {
+  margin: .4rem 0;
+  font-size: .95rem;
+  color: #ccc;
+}
+
+/* Assessment form */
+.assessment-form {
+  margin: 3rem auto;
+  background: #111;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 700px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.assessment-form h3 {
+  margin-bottom: 1rem;
+  color: #a8ff60;
+  text-align: center;
+}
+
+.assessment-form label {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.assessment-form input,
+.assessment-form select,
+.assessment-form textarea {
+  width: 100%;
+  margin-top: .3rem;
+  padding: .7rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.assessment-form input:focus,
+.assessment-form select:focus,
+.assessment-form textarea:focus {
+  border-color: #a8ff60;
+  outline: none;
+}
+
+/* Generated workouts */
+.workouts-section {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.workout-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.workout-card {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  width: 280px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.workout-card:hover {
+  transform: translateY(-3px);
+  border-color: #a8ff60;
+}
+
+.workout-card h4 {
+  color: #a8ff60;
+  margin-bottom: .3rem;
+}
+
+.workout-card .desc {
+  color: #ccc;
+  font-size: .9rem;
+  margin-bottom: .5rem;
+}
+
+.workout-card ul {
+  list-style: none;
+  padding-left: 0;
+  color: #eee;
+  font-size: .9rem;
+  margin-bottom: 1rem;
+}
+
+.workout-card .actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.workout-card .actions button {
+  background: none;
+  border: none;
+  color: #a8ff60;
+  cursor: pointer;
+}
+
+.workout-card .actions button:hover {
+  text-decoration: underline;
+}
+
+/* Utilities (reuse your global button style name) */
+.submitBtnWide {
+  margin-top: 1rem;
+  width: 100%;
+  background: #a8ff60;
+  color: #000;
+  border: none;
+  padding: .9rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submitBtnWide:hover { background: #90f34c; }
+
+/* Responsive */
+@media (max-width: 800px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

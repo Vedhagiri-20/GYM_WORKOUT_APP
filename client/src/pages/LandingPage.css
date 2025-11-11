@@ -1,0 +1,56 @@
+.hero {
+  width: 100%;
+  height: 100vh;
+  background: url("../images/hero-bg.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding-top: 90px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.hero-heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #a8ff60;
+  text-shadow: 0 0 15px rgba(168, 255, 96, 0.3);
+  margin-bottom: 1rem;
+}
+
+.hero-subtext {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.cta-btn {
+  background-color: #a8ff60;
+  color: #000;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #8be54d;
+  transform: scale(1.05);
+}

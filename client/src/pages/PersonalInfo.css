@@ -1,0 +1,95 @@
+/* src/pages/PersonalInfo.css */
+.signup-page {
+  padding: 7rem 1rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.signup-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 0 0 .5rem;
+}
+
+.signup-sub {
+  text-align: center;
+  color: #bbb;
+  margin-bottom: 2rem;
+}
+
+.signup-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.signup-form {
+  background: #111;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+}
+
+.signup-form label {
+  display: block;
+  font-size: .9rem;
+  color: #ddd;
+  margin-bottom: .35rem;
+}
+
+.signup-form input,
+.signup-form select {
+  width: 100%;
+  padding: .7rem .8rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+}
+
+.signup-form input:focus,
+.signup-form select:focus {
+  border-color: #a8ff60;
+}
+
+.submitBtnWide {
+  margin-top: 1rem;
+  width: 100%;
+  background: #a8ff60;
+  color: #000;
+  border: none;
+  padding: .9rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submitBtnWide:hover { background: #90f34c; }
+
+/* Right column */
+.signup-summary .summary-card {
+  background: #111;
+  border-radius: 10px;
+  padding: 1rem;
+  position: sticky;
+  top: 90px;
+}
+
+.summary-card h4 { margin: 0 0 1rem; }
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: .35rem 0;
+}
+.summary-row .muted { color: #aaa; }
+.summary-row.total strong { font-size: 1.2rem; }
+
+@media (max-width: 900px) {
+  .signup-grid { grid-template-columns: 1fr; }
+  .summary-card { position: static; }
+}
