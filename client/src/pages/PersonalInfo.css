@@ -93,3 +93,37 @@
   .signup-grid { grid-template-columns: 1fr; }
   .summary-card { position: static; }
 }
+/* Increase spacing between all rows */
+.field-row {
+  display: grid;
+  gap: 1.75rem;       /* increased from 1.5rem */
+  margin-bottom: 2rem; /* increased space between rows */
+}
+
+/* Add more horizontal spacing between columns */
+.field-row-2 {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;  /* NEW: space between left/right fields */
+}
+
+.field-row-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;  /* NEW */
+}
+
+/* Add more spacing around the whole form container */
+.signup-form {
+  padding: 2rem 2.5rem;  /* increased padding */
+}
+
+/* Make field boxes slightly taller */
+.field input,
+.field select {
+  width: 100%;
+  padding: 1rem;     /* increased from 0.8rem */
+  background: #111;
+  border-radius: 6px;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 1rem;
+}

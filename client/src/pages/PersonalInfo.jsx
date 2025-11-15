@@ -6,24 +6,34 @@ import "./PersonalInfo.css";
 export default function PersonalInfo() {
   const navigate = useNavigate();
   const { state } = useLocation();
+
+  // Selected plan: prefer router state, fallback to localStorage
   const [plan, setPlan] = useState(() => {
-    // prefer router state, fallback to localStorage
     return state?.plan || JSON.parse(localStorage.getItem("selectedPlan") || "null");
   });
 
+  // Form state
   const [form, setForm] = useState({
     firstName: "",
+    middleInitial: "",
     lastName: "",
     email: "",
     phone: "",
+    address: "",
+    city: "",
+    zip: "",
+    country: "United States",
     dob: "",
     gender: "",
-    address: "",
+     cardName: "",
+  cardNumber: "",
+  cardExpiry: "",
+  cardCvv: "",
   });
 
   useEffect(() => {
     if (!plan) {
-      // no plan? bounce user back to plans
+    
       navigate("/plans", { replace: true });
     }
   }, [plan, navigate]);
@@ -33,76 +43,285 @@ export default function PersonalInfo() {
     setForm((f) => ({ ...f, [name]: value }));
   };
 
-  const onSubmit = (e) => {
+    const onSubmit = (e) => {
     e.preventDefault();
 
-    // very light validation for UI sprint
-    if (!form.firstName || !form.lastName || !form.email || !form.phone) {
-      alert("Please fill in First name, Last name, Email, and Phone.");
+    // light validation: personal + card fields
+    if (
+      !form.firstName ||
+      !form.lastName ||
+      !form.email ||
+      !form.phone ||
+      !form.address ||
+      !form.city ||
+      !form.zip ||
+      !form.cardName ||
+      !form.cardNumber ||
+      !form.cardExpiry ||
+      !form.cardCvv
+    ) {
+      alert("Please fill in all required fields, including card information.");
       return;
     }
 
-    const profile = { ...form, plan };
+    const profile = {
+      ...form,
+      plan,
+      role: "client",
+      profileCompleted: true,
+      createdAt: new Date().toISOString(),
+    };
+
     localStorage.setItem("userProfile", JSON.stringify(profile));
 
     // go to Assessment next
     navigate("/assessment", { state: { profile } });
   };
 
+
   if (!plan) return null;
 
   return (
     <div className="signup-page">
       <h2 className="signup-title">Personal Information</h2>
-      <p className="signup-sub">We want to know more about you. Let's start with the basics.</p>
+      <p className="signup-sub">
+        We want to know more about you. Let&apos;s start with the basics.
+      </p>
 
       <div className="signup-grid">
         {/* LEFT: FORM */}
         <form className="signup-form" onSubmit={onSubmit}>
-          <div className="grid2">
-            <div>
-              <label>First Name</label>
-              <input name="firstName" value={form.firstName} onChange={onChange} required />
+          {/* Row 1: First / Middle / Last */}
+          <div className="field-row field-row-3">
+            <div className="field">
+              <label htmlFor="firstName">
+                First name <span className="required">*</span>
+              </label>
+              <input
+                id="firstName"
+                name="firstName"
+                value={form.firstName}
+                onChange={onChange}
+                required
+              />
             </div>
-            <div>
-              <label>Last Name</label>
-              <input name="lastName" value={form.lastName} onChange={onChange} required />
+
+            <div className="field">
+              <label htmlFor="middleInitial">Middle initial</label>
+              <input
+                id="middleInitial"
+                name="middleInitial"
+                value={form.middleInitial}
+                onChange={onChange}
+                maxLength={1}
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="lastName">
+                Last name <span className="required">*</span>
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                value={form.lastName}
+                onChange={onChange}
+                required
+              />
             </div>
           </div>
 
-          <div className="grid2">
-            <div>
-              <label>Email Address</label>
-              <input type="email" name="email" value={form.email} onChange={onChange} required />
+          {/* Row 2: Email / Phone */}
+          <div className="field-row field-row-2">
+            <div className="field">
+              <label htmlFor="email">
+                Email <span className="required">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={onChange}
+                required
+              />
             </div>
-            <div>
-              <label>Phone Number</label>
-              <input name="phone" value={form.phone} onChange={onChange} required />
+
+            <div className="field">
+              <label htmlFor="phone">
+                Mobile phone <span className="required">*</span>
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                value={form.phone}
+                onChange={onChange}
+                required
+              />
             </div>
           </div>
 
-          <div className="grid2">
-            <div>
-              <label>Date of Birth</label>
-              <input type="date" name="dob" value={form.dob} onChange={onChange} />
+          {/* Row 3: Address / Country */}
+          <div className="field-row field-row-2">
+            <div className="field">
+              <label htmlFor="address">
+                Mailing address <span className="required">*</span>
+              </label>
+              <input
+                id="address"
+                name="address"
+                value={form.address}
+                onChange={onChange}
+                required
+              />
             </div>
-            <div>
-              <label>Gender</label>
-              <select name="gender" value={form.gender} onChange={onChange}>
-                <option value="">Prefer not to say</option>
-                <option>Female</option>
-                <option>Male</option>
-                <option>Non-binary</option>
+
+            <div className="field">
+              <label htmlFor="country">Country</label>
+              <select
+                id="country"
+                name="country"
+                value={form.country}
+                onChange={onChange}
+              >
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="Mexico">Mexico</option>
               </select>
             </div>
           </div>
 
-          <div>
-            <label>Address</label>
-            <input name="address" value={form.address} onChange={onChange} />
+          {/* Row 4: City / Zip */}
+          <div className="field-row field-row-2">
+            <div className="field">
+              <label htmlFor="city">
+                City <span className="required">*</span>
+              </label>
+              <input
+                id="city"
+                name="city"
+                value={form.city}
+                onChange={onChange}
+                required
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="zip">
+                Zip code <span className="required">*</span>
+              </label>
+              <input
+                id="zip"
+                name="zip"
+                value={form.zip}
+                onChange={onChange}
+                required
+              />
+            </div>
           </div>
 
-          <button type="submit" className="submitBtnWide">Create Account</button>
+          {/* Row 5: DOB / Gender */}
+          <div className="field-row field-row-2">
+            <div className="field">
+              <label htmlFor="dob">
+                Date of Birth - MM/DD/YYYY <span className="required">*</span>
+              </label>
+              <input
+                id="dob"
+                name="dob"
+                type="date"
+                value={form.dob}
+                onChange={onChange}
+                required
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="gender">
+                Gender <span className="required">*</span>
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                value={form.gender}
+                onChange={onChange}
+                required
+              >
+                <option value="">Select</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="prefer-not-say">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+                {/* CARD INFORMATION */}
+      <h3 className="section-title">Card Information</h3>
+
+      <div className="field-row field-row-2">
+        <div className="field">
+          <label htmlFor="cardName">
+            Name on Card <span className="required">*</span>
+          </label>
+          <input
+            id="cardName"
+            name="cardName"
+            value={form.cardName}
+            onChange={onChange}
+            required
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor="cardNumber">
+            Card Number <span className="required">*</span>
+          </label>
+          <input
+            id="cardNumber"
+            name="cardNumber"
+            value={form.cardNumber}
+            onChange={onChange}
+            inputMode="numeric"
+            maxLength={19}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="field-row field-row-2">
+        <div className="field">
+          <label htmlFor="cardExpiry">
+            Expiration Date (MM/YY) <span className="required">*</span>
+          </label>
+          <input
+            id="cardExpiry"
+            name="cardExpiry"
+            value={form.cardExpiry}
+            onChange={onChange}
+            placeholder="MM/YY"
+            required
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor="cardCvv">
+            CVV <span className="required">*</span>
+          </label>
+          <input
+            id="cardCvv"
+            name="cardCvv"
+            value={form.cardCvv}
+            onChange={onChange}
+            inputMode="numeric"
+            maxLength={4}
+            required
+          />
+        </div>
+      </div>
+
+          <button type="submit" className="submitBtnWide">
+            Create Account
+          </button>
         </form>
 
         {/* RIGHT: SUMMARY */}
