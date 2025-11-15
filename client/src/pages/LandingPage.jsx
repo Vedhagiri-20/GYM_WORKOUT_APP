@@ -22,7 +22,6 @@ export default function LandingPage() {
         </nav>
       </header>
 
-      {/* === HERO SECTION === */}
       <section className="hero">
         <div className="hero-overlay">
           <h1 className="hero-heading">
@@ -30,7 +29,6 @@ export default function LandingPage() {
           </h1>
       
 
-          {/* Let’s Start → goes to /assessment */}
           <Link to="/assessment">
             <button className="cta-btn">Let’s Start →</button>
           </Link>
