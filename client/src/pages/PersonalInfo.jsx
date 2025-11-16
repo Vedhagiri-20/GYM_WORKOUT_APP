@@ -1,130 +1,137 @@
 // src/pages/PersonalInfo.jsx
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PersonalInfo.css";
 
 export default function PersonalInfo() {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const [plan, setPlan] = useState(() => {
-    // prefer router state, fallback to localStorage
-    return state?.plan || JSON.parse(localStorage.getItem("selectedPlan") || "null");
-  });
 
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    dob: "",
-    gender: "",
-    address: "",
+    password: ""
   });
 
+  // Load selected plan from localStorage
   useEffect(() => {
-    if (!plan) {
-      // no plan? bounce user back to plans
-      navigate("/plans", { replace: true });
+    const planJson = localStorage.getItem("selectedPlan");
+    if (planJson) {
+      setSelectedPlan(JSON.parse(planJson));
     }
-  }, [plan, navigate]);
+  }, []);
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const handleCreate = (e) => {
     e.preventDefault();
 
-    // very light validation for UI sprint
-    if (!form.firstName || !form.lastName || !form.email || !form.phone) {
-      alert("Please fill in First name, Last name, Email, and Phone.");
+    // Validate simple fields
+    if (
+      !form.firstName ||
+      !form.lastName ||
+      !form.email ||
+      !form.phone ||
+      !form.password
+    ) {
+      alert("Please fill all fields.");
       return;
     }
 
-    const profile = { ...form, plan };
+    // Build user profile object
+    const profile = {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email: form.email,
+      phone: form.phone,
+      password: form.password,
+      plan: selectedPlan ? selectedPlan.name : "Not Selected",
+      role: "client"
+    };
+
+    // Save client profile
     localStorage.setItem("userProfile", JSON.stringify(profile));
 
-    // go to Assessment next
-    navigate("/assessment", { state: { profile } });
-  };
+    // Save active session
+    localStorage.setItem(
+      "activeUser",
+      JSON.stringify({ email: profile.email, role: "client" })
+    );
 
-  if (!plan) return null;
+    // Redirect to client dashboard
+    navigate("/client/dashboard");
+  };
 
   return (
     <div className="signup-page">
-      <h2 className="signup-title">Personal Information</h2>
-      <p className="signup-sub">We want to know more about you. Let's start with the basics.</p>
+      <h2 className="signup-title">Create Your Account</h2>
 
-      <div className="signup-grid">
-        {/* LEFT: FORM */}
-        <form className="signup-form" onSubmit={onSubmit}>
-          <div className="grid2">
-            <div>
-              <label>First Name</label>
-              <input name="firstName" value={form.firstName} onChange={onChange} required />
-            </div>
-            <div>
-              <label>Last Name</label>
-              <input name="lastName" value={form.lastName} onChange={onChange} required />
-            </div>
-          </div>
+      {selectedPlan && (
+        <p className="plan-info">
+          Selected Plan: <strong>{selectedPlan.name}</strong>{" "}
+          (${selectedPlan.price}/month)
+        </p>
+      )}
 
-          <div className="grid2">
-            <div>
-              <label>Email Address</label>
-              <input type="email" name="email" value={form.email} onChange={onChange} required />
-            </div>
-            <div>
-              <label>Phone Number</label>
-              <input name="phone" value={form.phone} onChange={onChange} required />
-            </div>
-          </div>
+      <form className="signup-card" onSubmit={handleCreate}>
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            name="firstName"
+            type="text"
+            value={form.firstName}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className="grid2">
-            <div>
-              <label>Date of Birth</label>
-              <input type="date" name="dob" value={form.dob} onChange={onChange} />
-            </div>
-            <div>
-              <label>Gender</label>
-              <select name="gender" value={form.gender} onChange={onChange}>
-                <option value="">Prefer not to say</option>
-                <option>Female</option>
-                <option>Male</option>
-                <option>Non-binary</option>
-              </select>
-            </div>
-          </div>
+        <div className="form-group">
+          <label>Last Name</label>
+          <input
+            name="lastName"
+            type="text"
+            value={form.lastName}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div>
-            <label>Address</label>
-            <input name="address" value={form.address} onChange={onChange} />
-          </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </div>
 
-          <button type="submit" className="submitBtnWide">Create Account</button>
-        </form>
+        <div className="form-group">
+          <label>Phone</label>
+          <input
+            name="phone"
+            type="text"
+            value={form.phone}
+            onChange={handleChange}
+          />
+        </div>
 
-        {/* RIGHT: SUMMARY */}
-        <aside className="signup-summary">
-          <div className="summary-card">
-            <h4>Membership Summary</h4>
-            <div className="summary-row">
-              <span className="muted">Plan</span>
-              <strong>{plan?.name}</strong>
-            </div>
-            <div className="summary-row">
-              <span className="muted">Monthly</span>
-              <strong>${plan?.price?.toFixed(2)}</strong>
-            </div>
-            <hr />
-            <div className="summary-row total">
-              <span>Total</span>
-              <strong>${plan?.price?.toFixed(2)}</strong>
-            </div>
-          </div>
-        </aside>
-      </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button className="signup-btn" type="submit">
+          Create Account →
+        </button>
+      </form>
     </div>
   );
 }
