@@ -6,8 +6,6 @@ export default function LandingPage() {
   return (
     <div className="landing">
 
-=======
-      {/* --- HERO SECTION --- */}
       <section className="hero">
         <div className="hero-overlay">
           <h1 className="hero-heading">
