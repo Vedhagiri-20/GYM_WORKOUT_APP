@@ -12,7 +12,8 @@ export default function LandingPage() {
             Sculpt Your Body, <br /> Elevate Your Spirit
           </h1>
 
-          <Link to="/assessment">
+          
+          <Link to="/login">
             <button className="cta-btn">Let’s Start →</button>
           </Link>
         </div>
