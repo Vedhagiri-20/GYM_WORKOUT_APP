@@ -5,10 +5,10 @@ import "./MembershipPlans.css";
 export default function MembershipPlans() {
   const navigate = useNavigate();
 
+  // Save plan + go to signup
   const choosePlan = (plan) => {
     localStorage.setItem("selectedPlan", JSON.stringify(plan));
-    // also pass via router state (handy during this session)
-    navigate("/signup", { state: { plan } });
+    navigate("/signup");
   };
 
   return (
@@ -16,11 +16,14 @@ export default function MembershipPlans() {
       <h2 className="plans-heading">
         FLEXIBLE <span className="highlight">PLANS</span> FOR EVERY GOAL
       </h2>
+
       <p className="plans-subtext">
         Choose the membership that matches your fitness ambitions.
       </p>
 
       <div className="plans-container">
+
+        {/* BASIC PLAN */}
         <div className="plan-card">
           <h3>Basic</h3>
           <p className="price">$25<span>/month</span></p>
@@ -41,6 +44,7 @@ export default function MembershipPlans() {
           </button>
         </div>
 
+        {/* STANDARD PLAN */}
         <div className="plan-card featured">
           <h3>Standard</h3>
           <p className="price">$35<span>/month</span></p>
@@ -61,6 +65,7 @@ export default function MembershipPlans() {
           </button>
         </div>
 
+        {/* PREMIUM PLAN */}
         <div className="plan-card">
           <h3>Premium</h3>
           <p className="price">$45<span>/month</span></p>
@@ -80,6 +85,7 @@ export default function MembershipPlans() {
             Get started →
           </button>
         </div>
+
       </div>
     </div>
   );

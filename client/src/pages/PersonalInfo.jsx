@@ -1,6 +1,6 @@
 // src/pages/PersonalInfo.jsx
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PersonalInfo.css";
 
 export default function PersonalInfo() {
@@ -31,16 +31,16 @@ export default function PersonalInfo() {
   cardCvv: "",
   });
 
+  // Load selected plan from localStorage
   useEffect(() => {
     if (!plan) {
     
       navigate("/plans", { replace: true });
     }
-  }, [plan, navigate]);
+  }, []);
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
     const onSubmit = (e) => {
@@ -74,9 +74,11 @@ export default function PersonalInfo() {
 
     localStorage.setItem("userProfile", JSON.stringify(profile));
 
-    // go to Assessment next
-    navigate("/assessment", { state: { profile } });
-  };
+    // Save active session
+    localStorage.setItem(
+      "activeUser",
+      JSON.stringify({ email: profile.email, role: "client" })
+    );
 
 
   if (!plan) return null;

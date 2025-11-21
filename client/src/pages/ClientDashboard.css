@@ -1,0 +1,48 @@
+.client-dashboard {
+  padding-top: 7rem;
+  text-align: center;
+  color: #fff;
+}
+
+.dash-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.dash-sub {
+  margin-top: .4rem;
+  color: #bbb;
+}
+
+.dash-grid {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.dash-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 1.2rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s;
+}
+
+.dash-card:hover {
+  background: #a8ff60;
+  color: black;
+  transform: translateY(-3px);
+}
+
+.logout {
+  background: #ff4d4d;
+}
+
+.logout:hover {
+  background: #ff6b6b;
+}
