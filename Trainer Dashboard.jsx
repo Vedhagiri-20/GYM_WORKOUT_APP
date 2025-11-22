@@ -1,15 +1,8 @@
-<button
-  className="dash-card"
-  onClick={() => navigate("/assessment-flow")}
->
-  Auto Workout Flow
-</button>
-// src/pages/ClientDashboard.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./ClientDashboard.css";
+import "./TrainerDashboard.css";
 
-export default function ClientDashboard() {
+export default function TrainerDashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
@@ -20,40 +13,24 @@ export default function ClientDashboard() {
       return;
     }
     const parsed = JSON.parse(stored);
-    if (parsed.role !== "client") {
+    if (parsed.role !== "trainer") {
       navigate("/login");
       return;
     }
     setUser(parsed);
-  }, []);
+  }, [navigate]);
 
   return (
-    <div className="client-dashboard">
+    <div className="trainer-dashboard dashboard-container">
       <h2 className="dash-title">Welcome, {user?.email}</h2>
-      <p className="dash-sub">Your personal fitness hub</p>
-
+      <p className="dash-sub">Your trainer workspace</p>
       <div className="dash-grid">
-        <button
-          className="dash-card"
-          onClick={() => navigate("/assessment")}
-        >
-          Start / View Assessment
+        <button className="dash-card" onClick={() => navigate("/clients")}>
+          Client List
         </button>
-
-        <button
-          className="dash-card"
-          onClick={() => navigate("/workouts")}
-        >
-          My Workouts
+        <button className="dash-card" onClick={() => navigate("/plans")}>
+          Manage Workout Plans
         </button>
-
-        <button
-          className="dash-card"
-          onClick={() => navigate("/profile")}
-        >
-          My Profile
-        </button>
-
         <button
           className="dash-card logout"
           onClick={() => {

@@ -213,7 +213,7 @@ export default function ClientAssessment() {
           </div>
 
           <button onClick={approveWorkouts} className="submitBtnWide">
-            ✅ Approve & Assign Workouts
+            Approve & Assign Workouts
           </button>
         </section>
       )}
