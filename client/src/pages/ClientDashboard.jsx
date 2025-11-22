@@ -1,3 +1,9 @@
+<button
+  className="dash-card"
+  onClick={() => navigate("/assessment-flow")}
+>
+  Auto Workout Flow
+</button>
 // src/pages/ClientDashboard.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
