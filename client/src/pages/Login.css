@@ -1,29 +1,76 @@
 /* src/pages/Login.css */
 
+/* Full-page wrapper with video */
+.login-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Background video */
+.login-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
+}
+
+/* Dark overlay on video */
+.login-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: -2;
+}
+
+/* Glass login panel */
 .login-page {
-  padding: 7rem 1rem 3rem; /* accounts for fixed navbar */
+  position: relative;
   max-width: 400px;
-  margin: 0 auto;
+  margin-left: 6rem;
+  background: rgba(20, 20, 20, 0.6);
+  padding: 2.2rem 2.4rem;
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  z-index: 10;
   color: #ffffff;
 }
 
+/* Heading */
 .login-title {
   text-align: center;
-  margin-bottom: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #a8ff60;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.5px;
 }
 
-.login-subtitle {
+/* Subtext / quote */
+.login-subtext {
   text-align: center;
-  color: #bbbbbb;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #e1e1e1;
+  margin-bottom: 1.4rem;
 }
 
+/* Form container inside card */
 .login-card {
-  background: #111111;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  padding: 1rem 0 0 0;
 }
 
 .form-group {
@@ -40,30 +87,57 @@
 .form-input {
   width: 100%;
   padding: 0.7rem 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #333333;
-  background: #1a1a1a;
-  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000000;
 }
 
 .form-input:focus {
-  outline: none;
-  border-color: #a8ff60;
+  outline: 2px solid #a8ff60;
 }
 
+/* Errors and signup prompt */
 .error-text {
   color: #ff6b6b;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
 
+.signup-box {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.signup-btn {
+  margin-top: 0.8rem;
+  padding: 0.6rem 1.2rem;
+  background: #a8ff60;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: #8be54d;
+}
+
+/* Login button */
 .login-btn {
   width: 100%;
   background-color: #a8ff60;
   color: #000000;
   border: none;
   padding: 0.9rem 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 0.3rem;
@@ -73,33 +147,10 @@
   background-color: #8be54d;
 }
 
+/* Helper text under card */
 .login-helper {
   margin-top: 1.5rem;
   font-size: 0.85rem;
-  color: #aaaaaa;
+  color: #f2f2f2;
   line-height: 1.5;
-}
-.signup-box {
-  background: #331111;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #aa4444;
-  color: #ffbaba;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.signup-btn {
-  margin-top: 0.8rem;
-  padding: 0.6rem 1rem;
-  background: #a8ff60;
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.signup-btn:hover {
-  background: #8be54d;
 }
