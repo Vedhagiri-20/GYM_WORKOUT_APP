@@ -3,17 +3,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+/* ⭐ Import the video (same as other pages) */
+import gymVideo from "../assets/GYM_BG.mp4";
+
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Hardcoded demo users for testing
   const staffUsers = [
     { email: "trainer@gym.com", password: "trainer123", role: "trainer" },
     { email: "admin@gym.com", password: "admin123", role: "admin" },
-    { email: "client@gym.com", password: "123", role: "client" }, // test client
+    { email: "client@gym.com", password: "123", role: "client" },
   ];
 
   const handleSubmit = (e) => {
@@ -25,7 +27,6 @@ export default function Login() {
       return;
     }
 
-    // 1. Check hardcoded trainer/admin/client list
     const match = staffUsers.find(
       (u) => u.email === email && u.password === password
     );
@@ -40,12 +41,10 @@ export default function Login() {
       return;
     }
 
-    // 2. Optional: Check client created from PersonalInfo signup
     const savedProfileJson = localStorage.getItem("userProfile");
     if (savedProfileJson) {
       const profile = JSON.parse(savedProfileJson);
 
-      // Simple password rule for now
       if (profile.email === email && password === "123456") {
         const activeUser = { email: profile.email, role: "client" };
         localStorage.setItem("activeUser", JSON.stringify(activeUser));
@@ -54,67 +53,74 @@ export default function Login() {
       }
     }
 
-    // 3. If no match → show signup prompt
     setError("not-found");
   };
 
   return (
-    <div className="login-page">
-      <h2 className="login-title">Login</h2>
-      <p className="login-subtitle">
-        Use your email and password to access your dashboard.
-      </p>
+    <div className="login-wrapper">
 
-      <form className="login-card" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            className="form-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+      {/* Background Video */}
+      <video className="login-bg-video" autoPlay loop muted playsInline>
+        <source src={gymVideo} type="video/mp4" />
+      </video>
 
-        <div className="form-group">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+      {/* Video dark overlay */}
+      <div className="login-overlay" />
 
-        {/* ERROR HANDLING */}
-        {error === "invalid" && (
-          <p className="error-text">Please enter email and password.</p>
-        )}
+      {/* Login Form Container */}
+      <div className="login-page">
 
-        {error === "not-found" && (
-          <div className="signup-box">
-            <p>No account found with this email.</p>
-            <button
-              className="signup-btn"
-              type="button"
-              onClick={() => navigate("/plans")}
-            >
-              Sign Up
-            </button>
+        <h2 className="login-title">Login</h2>
+        <p className="login-subtext">Consistency builds champions. Log in to stay committed.</p>
+
+        <form className="login-card" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-        )}
 
-        <button type="submit" className="login-btn">
-          Log In
-        </button>
-      </form>
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-      <div className="login-helper">
-        <p><strong>Test accounts (demo only):</strong></p>
-        <p>Trainer → trainer@gym.com / trainer123</p>
-        <p>Admin → admin@gym.com / admin123</p>
-        <p>Client → client@gym.com / 123</p>
-       
+          {error === "invalid" && (
+            <p className="error-text">Please enter email and password.</p>
+          )}
+
+          {error === "not-found" && (
+            <div className="signup-box">
+              <p>No account found with this email.</p>
+              <button
+                className="signup-btn"
+                type="button"
+                onClick={() => navigate("/plans")}
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
+
+          <button type="submit" className="login-btn">Log In</button>
+        </form>
+
+        <div className="login-helper">
+          <p><strong>Test accounts (demo only):</strong></p>
+          <p>Trainer → trainer@gym.com / trainer123</p>
+          <p>Admin → admin@gym.com / admin123</p>
+          <p>Client → client@gym.com / 123</p>
+        </div>
+        
       </div>
     </div>
   );

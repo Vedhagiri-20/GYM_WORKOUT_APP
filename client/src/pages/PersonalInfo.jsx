@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PersonalInfo.css";
 
+/* ⭐ Import background video */
+import gymVideo from "../assets/GYM_BG.mp4";
+
 export default function PersonalInfo() {
   const navigate = useNavigate();
 
@@ -12,10 +15,9 @@ export default function PersonalInfo() {
     lastName: "",
     email: "",
     phone: "",
-    password: ""
+    password: "",
   });
 
-  // Load selected plan from localStorage
   useEffect(() => {
     const planJson = localStorage.getItem("selectedPlan");
     if (planJson) {
@@ -30,7 +32,6 @@ export default function PersonalInfo() {
   const handleCreate = (e) => {
     e.preventDefault();
 
-    // Validate simple fields
     if (
       !form.firstName ||
       !form.lastName ||
@@ -42,7 +43,6 @@ export default function PersonalInfo() {
       return;
     }
 
-    // Build user profile object
     const profile = {
       firstName: form.firstName,
       lastName: form.lastName,
@@ -50,34 +50,39 @@ export default function PersonalInfo() {
       phone: form.phone,
       password: form.password,
       plan: selectedPlan ? selectedPlan.name : "Not Selected",
-      role: "client"
+      role: "client",
     };
 
-    // Save client profile
     localStorage.setItem("userProfile", JSON.stringify(profile));
-
-    // Save active session
     localStorage.setItem(
       "activeUser",
       JSON.stringify({ email: profile.email, role: "client" })
     );
 
-    // Redirect to client dashboard
     navigate("/client/dashboard");
   };
 
   return (
     <div className="signup-page">
+
+      {/* Background Video */}
+      <video className="bg-video" autoPlay loop muted playsInline>
+        <source src={gymVideo} type="video/mp4" />
+      </video>
+
+      {/* Dark transparent overlay */}
+      <div className="overlay"></div>
+
       <h2 className="signup-title">Create Your Account</h2>
 
       {selectedPlan && (
         <p className="plan-info">
-          Selected Plan: <strong>{selectedPlan.name}</strong>{" "}
-          (${selectedPlan.price}/month)
+          Selected Plan: <strong>{selectedPlan.name}</strong> (${selectedPlan.price}/month)
         </p>
       )}
 
       <form className="signup-card" onSubmit={handleCreate}>
+        
         <div className="form-group">
           <label>First Name</label>
           <input
@@ -131,6 +136,7 @@ export default function PersonalInfo() {
         <button className="signup-btn" type="submit">
           Create Account →
         </button>
+
       </form>
     </div>
   );
