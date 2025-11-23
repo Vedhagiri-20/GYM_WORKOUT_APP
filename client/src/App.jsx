@@ -6,6 +6,8 @@ import MembershipPlans from "./pages/MembershipPlans";
 import PersonalInfo from "./pages/PersonalInfo";
 import ClientAssessment from "./pages/ClientAssessment";
 import WorkoutLog from "./pages/WorkoutLog";
+import DashboardAssessmentFlow from "./pages/DashboardAssessmentFlow";
+
 import Login from "./pages/Login";
 import ClientDashboard from "./pages/ClientDashboard";
 
@@ -27,6 +29,8 @@ export default function App() {
         <Route path="/signup" element={<PersonalInfo />} />
         <Route path="/assessment" element={<ClientAssessment />} />
         <Route path="/workouts" element={<WorkoutLog />} />
+        <Route path="/assessment-flow" element={<DashboardAssessmentFlow />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/client/dashboard" element={<ClientDashboard />} />
       </Routes>

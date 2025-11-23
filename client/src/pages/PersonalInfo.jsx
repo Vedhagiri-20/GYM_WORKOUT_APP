@@ -1,6 +1,6 @@
 // src/pages/PersonalInfo.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./PersonalInfo.css";
 
 /* ⭐ Import background video */
@@ -8,10 +8,21 @@ import gymVideo from "../assets/GYM_BG.mp4";
 
 export default function PersonalInfo() {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  // Selected plan: prefer router state, fallback to localStorage
+  const [plan] = useState(() => {
+    const fromState = state?.plan;
+    if (fromState) return fromState;
+
+    const stored = localStorage.getItem("selectedPlan");
+    return stored ? JSON.parse(stored) : null;
+  });
+
+  // Form state
   const [form, setForm] = useState({
     firstName: "",
+    middleInitial: "",
     lastName: "",
     email: "",
     phone: "",
@@ -19,17 +30,20 @@ export default function PersonalInfo() {
   });
 
   useEffect(() => {
-    const planJson = localStorage.getItem("selectedPlan");
-    if (planJson) {
-      setSelectedPlan(JSON.parse(planJson));
+    if (!plan) {
+      navigate("/plans", { replace: true });
     }
-  }, []);
+  }, [plan, navigate]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleCreate = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     if (
@@ -37,9 +51,15 @@ export default function PersonalInfo() {
       !form.lastName ||
       !form.email ||
       !form.phone ||
-      !form.password
+      !form.address ||
+      !form.city ||
+      !form.zip ||
+      !form.cardName ||
+      !form.cardNumber ||
+      !form.cardExpiry ||
+      !form.cardCvv
     ) {
-      alert("Please fill all fields.");
+      alert("Please fill in all required fields, including card information.");
       return;
     }
 
@@ -61,6 +81,8 @@ export default function PersonalInfo() {
 
     navigate("/client/dashboard");
   };
+
+  if (!plan) return null;
 
   return (
     <div className="signup-page">
