@@ -1,6 +1,6 @@
 // src/pages/PersonalInfo.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./PersonalInfo.css";
 
 export default function PersonalInfo() {
@@ -8,8 +8,12 @@ export default function PersonalInfo() {
   const { state } = useLocation();
 
   // Selected plan: prefer router state, fallback to localStorage
-  const [plan, setPlan] = useState(() => {
-    return state?.plan || JSON.parse(localStorage.getItem("selectedPlan") || "null");
+  const [plan] = useState(() => {
+    const fromState = state?.plan;
+    if (fromState) return fromState;
+
+    const stored = localStorage.getItem("selectedPlan");
+    return stored ? JSON.parse(stored) : null;
   });
 
   // Form state
@@ -25,28 +29,31 @@ export default function PersonalInfo() {
     country: "United States",
     dob: "",
     gender: "",
-     cardName: "",
-  cardNumber: "",
-  cardExpiry: "",
-  cardCvv: "",
+    cardName: "",
+    cardNumber: "",
+    cardExpiry: "",
+    cardCvv: "",
   });
 
-  // Load selected plan from localStorage
+  // If no plan, send user back to plans page
   useEffect(() => {
     if (!plan) {
-    
       navigate("/plans", { replace: true });
     }
-  }, []);
+  }, [plan, navigate]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-    const onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    // light validation: personal + card fields
+    // Light validation: personal + card fields
     if (
       !form.firstName ||
       !form.lastName ||
@@ -72,6 +79,7 @@ export default function PersonalInfo() {
       createdAt: new Date().toISOString(),
     };
 
+    // Save profile
     localStorage.setItem("userProfile", JSON.stringify(profile));
 
     // Save active session
@@ -80,6 +88,9 @@ export default function PersonalInfo() {
       JSON.stringify({ email: profile.email, role: "client" })
     );
 
+    // Go to client dashboard
+    navigate("/client-dashboard");
+  };
 
   if (!plan) return null;
 
@@ -103,7 +114,7 @@ export default function PersonalInfo() {
                 id="firstName"
                 name="firstName"
                 value={form.firstName}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -114,7 +125,7 @@ export default function PersonalInfo() {
                 id="middleInitial"
                 name="middleInitial"
                 value={form.middleInitial}
-                onChange={onChange}
+                onChange={handleChange}
                 maxLength={1}
               />
             </div>
@@ -127,7 +138,7 @@ export default function PersonalInfo() {
                 id="lastName"
                 name="lastName"
                 value={form.lastName}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -144,7 +155,7 @@ export default function PersonalInfo() {
                 name="email"
                 type="email"
                 value={form.email}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -157,7 +168,7 @@ export default function PersonalInfo() {
                 id="phone"
                 name="phone"
                 value={form.phone}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -173,7 +184,7 @@ export default function PersonalInfo() {
                 id="address"
                 name="address"
                 value={form.address}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -184,7 +195,7 @@ export default function PersonalInfo() {
                 id="country"
                 name="country"
                 value={form.country}
-                onChange={onChange}
+                onChange={handleChange}
               >
                 <option value="United States">United States</option>
                 <option value="Canada">Canada</option>
@@ -203,7 +214,7 @@ export default function PersonalInfo() {
                 id="city"
                 name="city"
                 value={form.city}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -216,7 +227,7 @@ export default function PersonalInfo() {
                 id="zip"
                 name="zip"
                 value={form.zip}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -226,14 +237,15 @@ export default function PersonalInfo() {
           <div className="field-row field-row-2">
             <div className="field">
               <label htmlFor="dob">
-                Date of Birth - MM/DD/YYYY <span className="required">*</span>
+                Date of Birth - MM/DD/YYYY{" "}
+                <span className="required">*</span>
               </label>
               <input
                 id="dob"
                 name="dob"
                 type="date"
                 value={form.dob}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -246,7 +258,7 @@ export default function PersonalInfo() {
                 id="gender"
                 name="gender"
                 value={form.gender}
-                onChange={onChange}
+                onChange={handleChange}
                 required
               >
                 <option value="">Select</option>
@@ -257,69 +269,70 @@ export default function PersonalInfo() {
               </select>
             </div>
           </div>
-                {/* CARD INFORMATION */}
-      <h3 className="section-title">Card Information</h3>
 
-      <div className="field-row field-row-2">
-        <div className="field">
-          <label htmlFor="cardName">
-            Name on Card <span className="required">*</span>
-          </label>
-          <input
-            id="cardName"
-            name="cardName"
-            value={form.cardName}
-            onChange={onChange}
-            required
-          />
-        </div>
+          {/* CARD INFORMATION */}
+          <h3 className="section-title">Card Information</h3>
 
-        <div className="field">
-          <label htmlFor="cardNumber">
-            Card Number <span className="required">*</span>
-          </label>
-          <input
-            id="cardNumber"
-            name="cardNumber"
-            value={form.cardNumber}
-            onChange={onChange}
-            inputMode="numeric"
-            maxLength={19}
-            required
-          />
-        </div>
-      </div>
+          <div className="field-row field-row-2">
+            <div className="field">
+              <label htmlFor="cardName">
+                Name on Card <span className="required">*</span>
+              </label>
+              <input
+                id="cardName"
+                name="cardName"
+                value={form.cardName}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <div className="field-row field-row-2">
-        <div className="field">
-          <label htmlFor="cardExpiry">
-            Expiration Date (MM/YY) <span className="required">*</span>
-          </label>
-          <input
-            id="cardExpiry"
-            name="cardExpiry"
-            value={form.cardExpiry}
-            onChange={onChange}
-            placeholder="MM/YY"
-            required
-          />
-        </div>
+            <div className="field">
+              <label htmlFor="cardNumber">
+                Card Number <span className="required">*</span>
+              </label>
+              <input
+                id="cardNumber"
+                name="cardNumber"
+                value={form.cardNumber}
+                onChange={handleChange}
+                inputMode="numeric"
+                maxLength={19}
+                required
+              />
+            </div>
+          </div>
 
-        <div className="field">
-          <label htmlFor="cardCvv">
-            CVV <span className="required">*</span>
-          </label>
-          <input
-            id="cardCvv"
-            name="cardCvv"
-            value={form.cardCvv}
-            onChange={onChange}
-            inputMode="numeric"
-            maxLength={4}
-            required
-          />
-        </div>
-      </div>
+          <div className="field-row field-row-2">
+            <div className="field">
+              <label htmlFor="cardExpiry">
+                Expiration Date (MM/YY) <span className="required">*</span>
+              </label>
+              <input
+                id="cardExpiry"
+                name="cardExpiry"
+                value={form.cardExpiry}
+                onChange={handleChange}
+                placeholder="MM/YY"
+                required
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="cardCvv">
+                CVV <span className="required">*</span>
+              </label>
+              <input
+                id="cardCvv"
+                name="cardCvv"
+                value={form.cardCvv}
+                onChange={handleChange}
+                inputMode="numeric"
+                maxLength={4}
+                required
+              />
+            </div>
+          </div>
 
           <button type="submit" className="submitBtnWide">
             Create Account
