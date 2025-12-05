@@ -7,6 +7,7 @@ import MembershipPlans from "./pages/MembershipPlans";
 import PersonalInfo from "./pages/PersonalInfo";           
 import ClientAssessment from "./pages/ClientAssessment";
 import WorkoutLog from "./pages/WorkoutLog";
+import UserList from "./pages/UserList.jsx";
 
 export default function App() {
   return (
@@ -19,6 +20,8 @@ export default function App() {
           <Link to="/assessment">Assessment</Link>
           <Link to="/workouts">Workouts</Link>
           <Link to="/signup" className="nav-btn">Join Now</Link>
+          <Link to="/users">Users</Link>
+
         </nav>
       </header>
 
@@ -28,6 +31,8 @@ export default function App() {
         <Route path="/signup" element={<PersonalInfo />} />         
         <Route path="/assessment" element={<ClientAssessment />} />
         <Route path="/workouts" element={<WorkoutLog />} />
+        <Route path="/users" element={<UserList />} />
+
       </Routes>
     </BrowserRouter>
   );
