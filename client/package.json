@@ -14,8 +14,9 @@
     "react-router-dom": "^6.30.1"
   },
   "devDependencies": {
+    "@parcel/transformer-raw": "^2.16.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "parcel": "^2.14.0"
+    "parcel": "^2.16.1"
   }
 }

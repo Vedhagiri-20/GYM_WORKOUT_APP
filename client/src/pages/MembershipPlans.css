@@ -1,29 +1,56 @@
 /* === MEMBERSHIP PAGE STYLES === */
+
 .plans-page {
-  background: #0b0b0b;
+  position: relative;
+  background: transparent;
   color: #fff;
   min-height: 100vh;
   padding: 7rem 1rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+}
+
+/* Background video */
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Dark overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: -1;
 }
 
 .plans-heading {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.6rem;
+  font-weight: 900;
   margin-bottom: 0.5rem;
+  letter-spacing: -1px;
 }
 
 .highlight {
   color: #a8ff60;
+  font-weight: 900;
 }
 
 .plans-subtext {
   text-align: center;
   color: #aaa;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin-bottom: 2.5rem;
 }
 
@@ -37,15 +64,19 @@
   margin: 0 auto;
 }
 
+/* Glass / transparent membership cards */
 .plan-card {
   flex: 1 1 0;
   max-width: 340px;
-  background: #1a1a1a;
+  background: rgba(20, 20, 20, 0.45);
   border-radius: 14px;
   padding: 2rem 1.5rem;
   color: #f3f3f3;
   text-align: left;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,14 +84,11 @@
 }
 
 .plan-card.featured {
-  background: radial-gradient(
-    120% 140% at 50% 0%,
-    #223916 0%,
-    #182508 60%,
-    #141f07 100%
-  );
+  background: rgba(35, 57, 22, 0.55);
   border: 1px solid #a8ff60;
-  box-shadow: 0 0 20px rgba(168, 255, 96, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 0 25px rgba(168, 255, 96, 0.35);
 }
 
 .plan-card:hover {

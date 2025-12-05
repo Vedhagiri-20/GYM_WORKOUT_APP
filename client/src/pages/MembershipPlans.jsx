@@ -2,28 +2,44 @@
 import { useNavigate } from "react-router-dom";
 import "./MembershipPlans.css";
 
+/* ⭐ IMPORTANT: Import the video from inside src/assets */
+import gymVideo from "../assets/GYM_BG.mp4";
+
 export default function MembershipPlans() {
   const navigate = useNavigate();
 
   const choosePlan = (plan) => {
     localStorage.setItem("selectedPlan", JSON.stringify(plan));
-    // also pass via router state (handy during this session)
-    navigate("/signup", { state: { plan } });
+    navigate("/signup");
   };
 
   return (
     <div className="plans-page">
+
+      {/* Background Video */}
+      <video className="bg-video" autoPlay loop muted playsInline>
+        <source src={gymVideo} type="video/mp4" />
+      </video>
+
+      {/* Overlay */}
+      <div className="overlay"></div>
+
       <h2 className="plans-heading">
         FLEXIBLE <span className="highlight">PLANS</span> FOR EVERY GOAL
       </h2>
+
       <p className="plans-subtext">
         Choose the membership that matches your fitness ambitions.
       </p>
 
       <div className="plans-container">
+
+        {/* BASIC */}
         <div className="plan-card">
           <h3>Basic</h3>
-          <p className="price">$25<span>/month</span></p>
+          <p className="price">
+            $25<span>/month</span>
+          </p>
           <p className="plan-desc">Essential package for regular workouts.</p>
 
           <h4 className="features-title">WHAT YOU GET</h4>
@@ -41,10 +57,15 @@ export default function MembershipPlans() {
           </button>
         </div>
 
+        {/* STANDARD */}
         <div className="plan-card featured">
           <h3>Standard</h3>
-          <p className="price">$35<span>/month</span></p>
-          <p className="plan-desc">Extended package for comprehensive training.</p>
+          <p className="price">
+            $35<span>/month</span>
+          </p>
+          <p className="plan-desc">
+            Extended package for comprehensive training.
+          </p>
 
           <h4 className="features-title">WHAT YOU GET</h4>
           <ul className="features">
@@ -61,10 +82,15 @@ export default function MembershipPlans() {
           </button>
         </div>
 
+        {/* PREMIUM */}
         <div className="plan-card">
           <h3>Premium</h3>
-          <p className="price">$45<span>/month</span></p>
-          <p className="plan-desc">Deluxe package with maximum benefits.</p>
+          <p className="price">
+            $45<span>/month</span>
+          </p>
+          <p className="plan-desc">
+            Deluxe package with maximum benefits.
+          </p>
 
           <h4 className="features-title">WHAT YOU GET</h4>
           <ul className="features">
@@ -80,6 +106,7 @@ export default function MembershipPlans() {
             Get started →
           </button>
         </div>
+
       </div>
     </div>
   );
