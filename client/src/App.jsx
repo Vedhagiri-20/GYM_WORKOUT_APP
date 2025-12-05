@@ -8,6 +8,7 @@ import ClientAssessment from "./pages/ClientAssessment";
 import WorkoutLog from "./pages/WorkoutLog";
 import UserList from "./pages/UserList.jsx";
 import DashboardAssessmentFlow from "./pages/DashboardAssessmentFlow";
+import BackendServer from "./pages/BackendServer.jsx";
 
 import Login from "./pages/Login";
 import ClientDashboard from "./pages/ClientDashboard";
@@ -41,6 +42,7 @@ export default function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/client/dashboard" element={<ClientDashboard />} />
+        <Route path="/backend-init" element={<BackendServer />} />
       </Routes>
     </BrowserRouter>
   );
