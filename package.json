@@ -1,0 +1,28 @@
+{
+  "name": "gym_workout_app",
+  "version": "1.0.0",
+  "description": "A simple React app built for INFO 530 Systems Development.",
+  "main": "users.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vedhagiri-20/GYM_WORKOUT_APP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vedhagiri-20/GYM_WORKOUT_APP/issues"
+  },
+  "homepage": "https://github.com/Vedhagiri-20/GYM_WORKOUT_APP#readme",
+  "dependencies": {
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-router-dom": "^7.10.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.1"
+  }
+}
