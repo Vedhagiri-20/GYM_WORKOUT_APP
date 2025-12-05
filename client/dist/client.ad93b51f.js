@@ -17664,7 +17664,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","./App.css":"6n0o6","react-router-dom":"61z4w","./pages/LandingPage":"d0blR","./pages/MembershipPlans":"jrEAS","./pages/PersonalInfo":"5NfIZ","./pages/ClientAssessment":"6sjFC","./pages/WorkoutLog":"guH40","./pages/Login":"khJsk","./pages/ClientDashboard":"bWfVY","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./pages/UserList.jsx":"lulny","./pages/DashboardAssessmentFlow":"6FWuX","./pages/BackendServer.jsx":"73o1z"}],"6n0o6":[function() {},{}],"61z4w":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","./App.css":"6n0o6","react-router-dom":"61z4w","./pages/LandingPage":"d0blR","./pages/MembershipPlans":"jrEAS","./pages/PersonalInfo":"5NfIZ","./pages/ClientAssessment":"6sjFC","./pages/WorkoutLog":"guH40","./pages/UserList.jsx":"lulny","./pages/DashboardAssessmentFlow":"6FWuX","./pages/BackendServer.jsx":"73o1z","./pages/Login":"khJsk","./pages/ClientDashboard":"bWfVY","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"6n0o6":[function() {},{}],"61z4w":[function(require,module,exports,__globalThis) {
 /**
  * React Router DOM v6.30.1
  *
@@ -27974,7 +27974,7 @@ $RefreshReg$(_c, "PersonalInfo");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./PersonalInfo.css":"kb7XR","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../assets/GYM_BG.mp4":"bGdDT"}],"kb7XR":[function() {},{}],"6sjFC":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./PersonalInfo.css":"kb7XR","../assets/GYM_BG.mp4":"bGdDT","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"kb7XR":[function() {},{}],"6sjFC":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$d2ec = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$d2ec.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -28826,442 +28826,7 @@ $RefreshReg$(_c1, "WorkoutLog");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../App.css":"6n0o6","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"6n0o6":[function() {},{}],"khJsk":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$9644 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-$parcel$ReactRefreshHelpers$9644.init();
-var prevRefreshReg = globalThis.$RefreshReg$;
-var prevRefreshSig = globalThis.$RefreshSig$;
-$parcel$ReactRefreshHelpers$9644.prelude(module);
-
-try {
-// src/pages/Login.jsx
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>Login);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactRouterDom = require("react-router-dom");
-var _loginCss = require("./Login.css");
-/* ⭐ Import the video (same as other pages) */ var _gymBgMp4 = require("../assets/GYM_BG.mp4");
-var _gymBgMp4Default = parcelHelpers.interopDefault(_gymBgMp4);
-var _s = $RefreshSig$();
-function Login() {
-    _s();
-    const navigate = (0, _reactRouterDom.useNavigate)();
-    const [email, setEmail] = (0, _react.useState)("");
-    const [password, setPassword] = (0, _react.useState)("");
-    const [error, setError] = (0, _react.useState)("");
-    const staffUsers = [
-        {
-            email: "trainer@gym.com",
-            password: "trainer123",
-            role: "trainer"
-        },
-        {
-            email: "admin@gym.com",
-            password: "admin123",
-            role: "admin"
-        },
-        {
-            email: "client@gym.com",
-            password: "123",
-            role: "client"
-        }
-    ];
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        setError("");
-        if (!email || !password) {
-            setError("invalid");
-            return;
-        }
-        const match = staffUsers.find((u)=>u.email === email && u.password === password);
-        if (match) {
-            const activeUser = {
-                email: match.email,
-                role: match.role
-            };
-            localStorage.setItem("activeUser", JSON.stringify(activeUser));
-            if (match.role === "trainer") navigate("/trainer/dashboard");
-            if (match.role === "admin") navigate("/admin/dashboard");
-            if (match.role === "client") navigate("/client/dashboard");
-            return;
-        }
-        const savedProfileJson = localStorage.getItem("userProfile");
-        if (savedProfileJson) {
-            const profile = JSON.parse(savedProfileJson);
-            if (profile.email === email && password === "123456") {
-                const activeUser = {
-                    email: profile.email,
-                    role: "client"
-                };
-                localStorage.setItem("activeUser", JSON.stringify(activeUser));
-                navigate("/client/dashboard");
-                return;
-            }
-        }
-        setError("not-found");
-    };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "login-wrapper",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("video", {
-                className: "login-bg-video",
-                autoPlay: true,
-                loop: true,
-                muted: true,
-                playsInline: true,
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("source", {
-                    src: (0, _gymBgMp4Default.default),
-                    type: "video/mp4"
-                }, void 0, false, {
-                    fileName: "src/pages/Login.jsx",
-                    lineNumber: 64,
-                    columnNumber: 9
-                }, this)
-            }, void 0, false, {
-                fileName: "src/pages/Login.jsx",
-                lineNumber: 63,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "login-overlay"
-            }, void 0, false, {
-                fileName: "src/pages/Login.jsx",
-                lineNumber: 68,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "login-page",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                        className: "login-title",
-                        children: "Login"
-                    }, void 0, false, {
-                        fileName: "src/pages/Login.jsx",
-                        lineNumber: 73,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "login-subtext",
-                        children: "Consistency builds champions. Log in to stay committed."
-                    }, void 0, false, {
-                        fileName: "src/pages/Login.jsx",
-                        lineNumber: 74,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                        className: "login-card",
-                        onSubmit: handleSubmit,
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "form-group",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                        className: "form-label",
-                                        children: "Email"
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Login.jsx",
-                                        lineNumber: 78,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                        type: "email",
-                                        className: "form-input",
-                                        value: email,
-                                        onChange: (e)=>setEmail(e.target.value)
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Login.jsx",
-                                        lineNumber: 79,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 77,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "form-group",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                        className: "form-label",
-                                        children: "Password"
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Login.jsx",
-                                        lineNumber: 88,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                        type: "password",
-                                        className: "form-input",
-                                        value: password,
-                                        onChange: (e)=>setPassword(e.target.value)
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Login.jsx",
-                                        lineNumber: 89,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 87,
-                                columnNumber: 11
-                            }, this),
-                            error === "invalid" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                className: "error-text",
-                                children: "Please enter email and password."
-                            }, void 0, false, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 98,
-                                columnNumber: 13
-                            }, this),
-                            error === "not-found" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "signup-box",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        children: "No account found with this email."
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Login.jsx",
-                                        lineNumber: 103,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        className: "signup-btn",
-                                        type: "button",
-                                        onClick: ()=>navigate("/plans"),
-                                        children: "Sign Up"
-                                    }, void 0, false, {
-                                        fileName: "src/pages/Login.jsx",
-                                        lineNumber: 104,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 102,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                type: "submit",
-                                className: "login-btn",
-                                children: "Log In"
-                            }, void 0, false, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 114,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/pages/Login.jsx",
-                        lineNumber: 76,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "login-helper",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
-                                    children: "Test accounts (demo only):"
-                                }, void 0, false, {
-                                    fileName: "src/pages/Login.jsx",
-                                    lineNumber: 118,
-                                    columnNumber: 14
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 118,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                children: "Trainer \u2192 trainer@gym.com / trainer123"
-                            }, void 0, false, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 119,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                children: "Admin \u2192 admin@gym.com / admin123"
-                            }, void 0, false, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 120,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                children: "Client \u2192 client@gym.com / 123"
-                            }, void 0, false, {
-                                fileName: "src/pages/Login.jsx",
-                                lineNumber: 121,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/pages/Login.jsx",
-                        lineNumber: 117,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/pages/Login.jsx",
-                lineNumber: 71,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/pages/Login.jsx",
-        lineNumber: 60,
-        columnNumber: 5
-    }, this);
-}
-_s(Login, "I5nlxnySThrFynfg0b4CBLAO5h0=", false, function() {
-    return [
-        (0, _reactRouterDom.useNavigate)
-    ];
-});
-_c = Login;
-var _c;
-$RefreshReg$(_c, "Login");
-
-  $parcel$ReactRefreshHelpers$9644.postlude(module);
-} finally {
-  globalThis.$RefreshReg$ = prevRefreshReg;
-  globalThis.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./Login.css":"4Cijz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../assets/GYM_BG.mp4":"bGdDT"}],"4Cijz":[function() {},{}],"bWfVY":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$afcc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-$parcel$ReactRefreshHelpers$afcc.init();
-var prevRefreshReg = globalThis.$RefreshReg$;
-var prevRefreshSig = globalThis.$RefreshSig$;
-$parcel$ReactRefreshHelpers$afcc.prelude(module);
-
-try {
-/*#__PURE__*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>ClientDashboard);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-// src/pages/ClientDashboard.jsx
-var _react = require("react");
-var _reactRouterDom = require("react-router-dom");
-var _clientDashboardCss = require("./ClientDashboard.css");
-var _s = $RefreshSig$();
-(0, _jsxDevRuntime.jsxDEV)("button", {
-    className: "dash-card",
-    onClick: ()=>navigate("/assessment-flow"),
-    children: "Auto Workout Flow"
-}, void 0, false, {
-    fileName: "src/pages/ClientDashboard.jsx",
-    lineNumber: 1,
-    columnNumber: 1
-}, undefined);
-function ClientDashboard() {
-    _s();
-    const navigate1 = (0, _reactRouterDom.useNavigate)();
-    const [user, setUser] = (0, _react.useState)(null);
-    (0, _react.useEffect)(()=>{
-        const stored = localStorage.getItem("activeUser");
-        if (!stored) {
-            navigate1("/login");
-            return;
-        }
-        const parsed = JSON.parse(stored);
-        if (parsed.role !== "client") {
-            navigate1("/login");
-            return;
-        }
-        setUser(parsed);
-    }, []);
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "client-dashboard",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "dash-title",
-                children: [
-                    "Welcome, ",
-                    user?.email
-                ]
-            }, void 0, true, {
-                fileName: "src/pages/ClientDashboard.jsx",
-                lineNumber: 32,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                className: "dash-sub",
-                children: "Your personal fitness hub"
-            }, void 0, false, {
-                fileName: "src/pages/ClientDashboard.jsx",
-                lineNumber: 33,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "dash-grid",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        className: "dash-card",
-                        onClick: ()=>navigate1("/assessment"),
-                        children: "Start / View Assessment"
-                    }, void 0, false, {
-                        fileName: "src/pages/ClientDashboard.jsx",
-                        lineNumber: 36,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        className: "dash-card",
-                        onClick: ()=>navigate1("/workouts"),
-                        children: "My Workouts"
-                    }, void 0, false, {
-                        fileName: "src/pages/ClientDashboard.jsx",
-                        lineNumber: 43,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        className: "dash-card",
-                        onClick: ()=>navigate1("/profile"),
-                        children: "My Profile"
-                    }, void 0, false, {
-                        fileName: "src/pages/ClientDashboard.jsx",
-                        lineNumber: 50,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        className: "dash-card logout",
-                        onClick: ()=>{
-                            localStorage.removeItem("activeUser");
-                            navigate1("/login");
-                        },
-                        children: "Logout"
-                    }, void 0, false, {
-                        fileName: "src/pages/ClientDashboard.jsx",
-                        lineNumber: 57,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/pages/ClientDashboard.jsx",
-                lineNumber: 35,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/pages/ClientDashboard.jsx",
-        lineNumber: 31,
-        columnNumber: 5
-    }, this);
-}
-_s(ClientDashboard, "7CTApz3LMzC8LG1QZqzjZq1hx+k=", false, function() {
-    return [
-        (0, _reactRouterDom.useNavigate)
-    ];
-});
-_c = ClientDashboard;
-var _c;
-$RefreshReg$(_c, "ClientDashboard");
-
-  $parcel$ReactRefreshHelpers$afcc.postlude(module);
-} finally {
-  globalThis.$RefreshReg$ = prevRefreshReg;
-  globalThis.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./ClientDashboard.css":"hlSvz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"hlSvz":[function() {},{}],"lulny":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../App.css":"6n0o6","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"6n0o6":[function() {},{}],"lulny":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$3a1d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$3a1d.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -30900,6 +30465,441 @@ $RefreshReg$(_c, "BackendServer");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./BackendServer.css":"cTnak","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"cTnak":[function() {},{}]},["hiyDA","gYcKb"], "gYcKb", "parcelRequiree135", {}, "./", "/", "http://localhost:1234")
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./BackendServer.css":"cTnak","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"cTnak":[function() {},{}],"khJsk":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$9644 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$9644.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9644.prelude(module);
+
+try {
+// src/pages/Login.jsx
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>Login);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactRouterDom = require("react-router-dom");
+var _loginCss = require("./Login.css");
+/* ⭐ Import the video (same as other pages) */ var _gymBgMp4 = require("../assets/GYM_BG.mp4");
+var _gymBgMp4Default = parcelHelpers.interopDefault(_gymBgMp4);
+var _s = $RefreshSig$();
+function Login() {
+    _s();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const [email, setEmail] = (0, _react.useState)("");
+    const [password, setPassword] = (0, _react.useState)("");
+    const [error, setError] = (0, _react.useState)("");
+    const staffUsers = [
+        {
+            email: "trainer@gym.com",
+            password: "trainer123",
+            role: "trainer"
+        },
+        {
+            email: "admin@gym.com",
+            password: "admin123",
+            role: "admin"
+        },
+        {
+            email: "client@gym.com",
+            password: "123",
+            role: "client"
+        }
+    ];
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        setError("");
+        if (!email || !password) {
+            setError("invalid");
+            return;
+        }
+        const match = staffUsers.find((u)=>u.email === email && u.password === password);
+        if (match) {
+            const activeUser = {
+                email: match.email,
+                role: match.role
+            };
+            localStorage.setItem("activeUser", JSON.stringify(activeUser));
+            if (match.role === "trainer") navigate("/trainer/dashboard");
+            if (match.role === "admin") navigate("/admin/dashboard");
+            if (match.role === "client") navigate("/client/dashboard");
+            return;
+        }
+        const savedProfileJson = localStorage.getItem("userProfile");
+        if (savedProfileJson) {
+            const profile = JSON.parse(savedProfileJson);
+            if (profile.email === email && password === "123456") {
+                const activeUser = {
+                    email: profile.email,
+                    role: "client"
+                };
+                localStorage.setItem("activeUser", JSON.stringify(activeUser));
+                navigate("/client/dashboard");
+                return;
+            }
+        }
+        setError("not-found");
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "login-wrapper",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("video", {
+                className: "login-bg-video",
+                autoPlay: true,
+                loop: true,
+                muted: true,
+                playsInline: true,
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("source", {
+                    src: (0, _gymBgMp4Default.default),
+                    type: "video/mp4"
+                }, void 0, false, {
+                    fileName: "src/pages/Login.jsx",
+                    lineNumber: 64,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "src/pages/Login.jsx",
+                lineNumber: 63,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "login-overlay"
+            }, void 0, false, {
+                fileName: "src/pages/Login.jsx",
+                lineNumber: 68,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "login-page",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                        className: "login-title",
+                        children: "Login"
+                    }, void 0, false, {
+                        fileName: "src/pages/Login.jsx",
+                        lineNumber: 73,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "login-subtext",
+                        children: "Consistency builds champions. Log in to stay committed."
+                    }, void 0, false, {
+                        fileName: "src/pages/Login.jsx",
+                        lineNumber: 74,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                        className: "login-card",
+                        onSubmit: handleSubmit,
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "form-group",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        className: "form-label",
+                                        children: "Email"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/Login.jsx",
+                                        lineNumber: 78,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "email",
+                                        className: "form-input",
+                                        value: email,
+                                        onChange: (e)=>setEmail(e.target.value)
+                                    }, void 0, false, {
+                                        fileName: "src/pages/Login.jsx",
+                                        lineNumber: 79,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 77,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "form-group",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        className: "form-label",
+                                        children: "Password"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/Login.jsx",
+                                        lineNumber: 88,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "password",
+                                        className: "form-input",
+                                        value: password,
+                                        onChange: (e)=>setPassword(e.target.value)
+                                    }, void 0, false, {
+                                        fileName: "src/pages/Login.jsx",
+                                        lineNumber: 89,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 87,
+                                columnNumber: 11
+                            }, this),
+                            error === "invalid" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                className: "error-text",
+                                children: "Please enter email and password."
+                            }, void 0, false, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 98,
+                                columnNumber: 13
+                            }, this),
+                            error === "not-found" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "signup-box",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        children: "No account found with this email."
+                                    }, void 0, false, {
+                                        fileName: "src/pages/Login.jsx",
+                                        lineNumber: 103,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        className: "signup-btn",
+                                        type: "button",
+                                        onClick: ()=>navigate("/plans"),
+                                        children: "Sign Up"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/Login.jsx",
+                                        lineNumber: 104,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 102,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                type: "submit",
+                                className: "login-btn",
+                                children: "Log In"
+                            }, void 0, false, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 114,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/pages/Login.jsx",
+                        lineNumber: 76,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "login-helper",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                    children: "Test accounts (demo only):"
+                                }, void 0, false, {
+                                    fileName: "src/pages/Login.jsx",
+                                    lineNumber: 118,
+                                    columnNumber: 14
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 118,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                children: "Trainer \u2192 trainer@gym.com / trainer123"
+                            }, void 0, false, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 119,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                children: "Admin \u2192 admin@gym.com / admin123"
+                            }, void 0, false, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 120,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                children: "Client \u2192 client@gym.com / 123"
+                            }, void 0, false, {
+                                fileName: "src/pages/Login.jsx",
+                                lineNumber: 121,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/pages/Login.jsx",
+                        lineNumber: 117,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/Login.jsx",
+                lineNumber: 71,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/Login.jsx",
+        lineNumber: 60,
+        columnNumber: 5
+    }, this);
+}
+_s(Login, "I5nlxnySThrFynfg0b4CBLAO5h0=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = Login;
+var _c;
+$RefreshReg$(_c, "Login");
+
+  $parcel$ReactRefreshHelpers$9644.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./Login.css":"4Cijz","../assets/GYM_BG.mp4":"bGdDT","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"4Cijz":[function() {},{}],"bWfVY":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$afcc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$afcc.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$afcc.prelude(module);
+
+try {
+/*#__PURE__*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>ClientDashboard);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+// src/pages/ClientDashboard.jsx
+var _react = require("react");
+var _reactRouterDom = require("react-router-dom");
+var _clientDashboardCss = require("./ClientDashboard.css");
+var _s = $RefreshSig$();
+(0, _jsxDevRuntime.jsxDEV)("button", {
+    className: "dash-card",
+    onClick: ()=>navigate("/assessment-flow"),
+    children: "Auto Workout Flow"
+}, void 0, false, {
+    fileName: "src/pages/ClientDashboard.jsx",
+    lineNumber: 1,
+    columnNumber: 1
+}, undefined);
+function ClientDashboard() {
+    _s();
+    const navigate1 = (0, _reactRouterDom.useNavigate)();
+    const [user, setUser] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        const stored = localStorage.getItem("activeUser");
+        if (!stored) {
+            navigate1("/login");
+            return;
+        }
+        const parsed = JSON.parse(stored);
+        if (parsed.role !== "client") {
+            navigate1("/login");
+            return;
+        }
+        setUser(parsed);
+    }, []);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "client-dashboard",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                className: "dash-title",
+                children: [
+                    "Welcome, ",
+                    user?.email
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/ClientDashboard.jsx",
+                lineNumber: 32,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                className: "dash-sub",
+                children: "Your personal fitness hub"
+            }, void 0, false, {
+                fileName: "src/pages/ClientDashboard.jsx",
+                lineNumber: 33,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "dash-grid",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "dash-card",
+                        onClick: ()=>navigate1("/assessment"),
+                        children: "Start / View Assessment"
+                    }, void 0, false, {
+                        fileName: "src/pages/ClientDashboard.jsx",
+                        lineNumber: 36,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "dash-card",
+                        onClick: ()=>navigate1("/workouts"),
+                        children: "My Workouts"
+                    }, void 0, false, {
+                        fileName: "src/pages/ClientDashboard.jsx",
+                        lineNumber: 43,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "dash-card",
+                        onClick: ()=>navigate1("/profile"),
+                        children: "My Profile"
+                    }, void 0, false, {
+                        fileName: "src/pages/ClientDashboard.jsx",
+                        lineNumber: 50,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "dash-card logout",
+                        onClick: ()=>{
+                            localStorage.removeItem("activeUser");
+                            navigate1("/login");
+                        },
+                        children: "Logout"
+                    }, void 0, false, {
+                        fileName: "src/pages/ClientDashboard.jsx",
+                        lineNumber: 57,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/ClientDashboard.jsx",
+                lineNumber: 35,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/ClientDashboard.jsx",
+        lineNumber: 31,
+        columnNumber: 5
+    }, this);
+}
+_s(ClientDashboard, "7CTApz3LMzC8LG1QZqzjZq1hx+k=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = ClientDashboard;
+var _c;
+$RefreshReg$(_c, "ClientDashboard");
+
+  $parcel$ReactRefreshHelpers$afcc.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./ClientDashboard.css":"hlSvz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"hlSvz":[function() {},{}]},["hiyDA","gYcKb"], "gYcKb", "parcelRequiree135", {}, "./", "/", "http://localhost:1234")
 
 //# sourceMappingURL=client.ad93b51f.js.map
