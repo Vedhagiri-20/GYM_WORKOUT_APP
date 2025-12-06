@@ -30,6 +30,7 @@ export default function PersonalInfo() {
   });
 
   useEffect(() => {
+    // if user somehow got here without a plan, send them back
     if (!plan) {
       navigate("/plans", { replace: true });
     }
@@ -43,50 +44,63 @@ export default function PersonalInfo() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !form.firstName ||
-      !form.lastName ||
-      !form.email ||
-      !form.phone ||
-      !form.address ||
-      !form.city ||
-      !form.zip ||
-      !form.cardName ||
-      !form.cardNumber ||
-      !form.cardExpiry ||
-      !form.cardCvv
-    ) {
-      alert("Please fill in all required fields, including card information.");
+    // Basic required fields
+    if (!form.firstName || !form.lastName || !form.email || !form.phone) {
+      alert("Please fill in first name, last name, email, and phone.");
       return;
     }
 
     const profile = {
       firstName: form.firstName,
+      middleInitial: form.middleInitial,
       lastName: form.lastName,
       email: form.email,
       phone: form.phone,
       password: form.password,
-      plan: selectedPlan ? selectedPlan.name : "Not Selected",
+      plan: plan ? plan.name : "Not Selected",
       role: "client",
     };
 
-    localStorage.setItem("userProfile", JSON.stringify(profile));
-    localStorage.setItem(
-      "activeUser",
-      JSON.stringify({ email: profile.email, role: "client" })
-    );
+    try {
+      // ✅ Call backend POST /api/users
+      const response = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+      });
 
-    navigate("/client/dashboard");
+      if (!response.ok) {
+        const errorBody = await response.json().catch(() => ({}));
+        console.error("Error response from backend:", errorBody);
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Profile saved successfully:", result);
+
+      // Keep your local storage behavior
+      localStorage.setItem("userProfile", JSON.stringify(profile));
+      localStorage.setItem(
+        "activeUser",
+        JSON.stringify({ email: profile.email, role: "client" })
+      );
+
+      navigate("/client/dashboard");
+    } catch (err) {
+      console.error("Error saving profile:", err.message);
+      alert("Something went wrong while saving your profile.");
+    }
   };
 
   if (!plan) return null;
 
   return (
     <div className="signup-page">
-
       {/* Background Video */}
       <video className="bg-video" autoPlay loop muted playsInline>
         <source src={gymVideo} type="video/mp4" />
@@ -97,20 +111,29 @@ export default function PersonalInfo() {
 
       <h2 className="signup-title">Create Your Account</h2>
 
-      {selectedPlan && (
+      {plan && (
         <p className="plan-info">
-          Selected Plan: <strong>{selectedPlan.name}</strong> (${selectedPlan.price}/month)
+          Selected Plan: <strong>{plan.name}</strong> (${plan.price}/month)
         </p>
       )}
 
-      <form className="signup-card" onSubmit={handleCreate}>
-        
+      <form className="signup-card" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>First Name</label>
           <input
             name="firstName"
             type="text"
             value={form.firstName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Middle Initial</label>
+          <input
+            name="middleInitial"
+            type="text"
+            value={form.middleInitial}
             onChange={handleChange}
           />
         </div>
@@ -158,7 +181,6 @@ export default function PersonalInfo() {
         <button className="signup-btn" type="submit">
           Create Account →
         </button>
-
       </form>
     </div>
   );

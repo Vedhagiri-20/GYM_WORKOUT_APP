@@ -23,7 +23,6 @@ export default function App() {
           <Link to="/plans">Plans</Link>
           <Link to="/assessment">Assessment</Link>
           <Link to="/workouts">Workouts</Link>
-          <Link to="/signup" className="nav-btn">Join Now</Link>
           <Link to="/users">Users</Link>
 
           <Link to="/plans" className="nav-btn">Join Now</Link>
